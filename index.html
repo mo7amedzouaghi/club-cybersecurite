@@ -322,7 +322,7 @@ legend{font-family:var(--titre);font-weight:700;font-size:17px;color:var(--marin
      </select></div>
     <div class="f"><label for="email">Adresse e-mail</label><input id="email" type="email" autocomplete="email"></div>
    </div>
-   <div class="f"><label for="motiv">Pourquoi veux-tu rejoindre le club ? *</label><textarea id="motiv" required></textarea></div>
+   <div class="f"><label for="motiv">Pourquoi veux-tu rejoindre le club ? *</label><textarea id="motiv" required maxlength="1000"></textarea></div>
   </fieldset>
 
   <fieldset>
@@ -370,6 +370,7 @@ legend{font-family:var(--titre);font-weight:700;font-size:17px;color:var(--marin
  <div class="pied-bas">Lycée Oued Ellil · Club Cybersécurité · A.S 2026-2027</div>
 </footer>
 
+<script src="firebase-config.js"></script>
 <script>
 (function(){
   var bg=document.querySelector('.burger'),mn=document.querySelector('.menu');
@@ -384,10 +385,24 @@ legend{font-family:var(--titre);font-weight:700;font-size:17px;color:var(--marin
   var lastText = '';
   // Collez ici l'URL de l'application web Google Apps Script (voir LISEZMOI.txt). Vide = pas d'envoi.
   var ENDPOINT = '';
+  var LIM = {nom:80,prenom:80,classe:40,niveau:80,tel:30,email:120,motiv:1000,pnom:120,ptel:30};
+  function saveFirebase(data){
+    var V = 'https://www.gstatic.com/firebasejs/10.12.2/';
+    return import(V + 'firebase-app.js').then(function(a){
+      return import(V + 'firebase-firestore.js').then(function(f){
+        var app = a.getApps().length ? a.getApp() : a.initializeApp(window.FIREBASE_CONFIG);
+        var db = f.getFirestore(app);
+        var doc = {};
+        Object.keys(LIM).forEach(function(k){ doc[k] = String(data[k] || '').slice(0, LIM[k]); });
+        doc.createdAt = f.serverTimestamp(); doc.statut = 'En attente'; doc.ficheRecue = false;
+        return f.addDoc(f.collection(db, 'inscriptions'), doc);
+      });
+    });
+  }
 
   function val(id){return ($(id).value || '').trim()}
 
-  if (ENDPOINT) { $('infoTxt').textContent = 'Ton inscription est envoyée au responsable du club. Remets aussi la fiche signée par ton parent ou tuteur : elle valide l\'inscription.'; }
+  if (ENDPOINT || window.FIREBASE_CONFIG) { $('infoTxt').textContent = 'Ton inscription est envoyée au responsable du club. Remets aussi la fiche signée par ton parent ou tuteur : elle valide l\'inscription.'; }
 
   $('f').addEventListener('submit', function(e){
     e.preventDefault();
@@ -425,9 +440,14 @@ legend{font-family:var(--titre);font-weight:700;font-size:17px;color:var(--marin
 
     var f = $('fiche'); f.style.display = 'block';
     $('msg').textContent = '';
+    var data = {};
+    fields.forEach(function(p){ data[p[1]] = val(p[1]); });
+    if (window.FIREBASE_CONFIG) {
+      $('msg').textContent = 'Enregistrement de ton inscription…';
+      saveFirebase(data).then(function(){ $('msg').textContent = 'Inscription enregistrée. Remets aussi la fiche signée au responsable du club.'; $('msg').className = 'note noprint ok'; })
+        .catch(function(){ $('msg').textContent = 'Enregistrement impossible pour le moment : remets la fiche signée à M. Zouaghi.'; $('msg').className = 'note noprint'; });
+    }
     if (ENDPOINT) {
-      var data = {};
-      fields.forEach(function(p){ data[p[1]] = val(p[1]); });
       try {
         fetch(ENDPOINT, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(data)})
           .then(function(){ $('msg').textContent = 'Inscription envoyée au responsable du club. Remets aussi la fiche signée.'; $('msg').className = 'note noprint ok'; })

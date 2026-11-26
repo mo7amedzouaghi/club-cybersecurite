@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /inscriptions/{id} {
+      // Tout le monde peut créer une inscription valide, mais jamais la lire.
+      allow create: if request.resource.data.keys().hasOnly(
+          ['nom','prenom','classe','niveau','tel','email','motiv','pnom','ptel','createdAt','statut','ficheRecue'])
+        && request.resource.data.nom is string && request.resource.data.nom.size() > 0 && request.resource.data.nom.size() <= 80
+        && request.resource.data.prenom is string && request.resource.data.prenom.size() > 0 && request.resource.data.prenom.size() <= 80
+        && request.resource.data.classe is string && request.resource.data.classe.size() > 0 && request.resource.data.classe.size() <= 40
+        && request.resource.data.niveau is string && request.resource.data.niveau.size() > 0 && request.resource.data.niveau.size() <= 80
+        && request.resource.data.tel is string && request.resource.data.tel.size() <= 30
+        && request.resource.data.email is string && request.resource.data.email.size() <= 120
+        && request.resource.data.motiv is string && request.resource.data.motiv.size() > 0 && request.resource.data.motiv.size() <= 1000
+        && request.resource.data.pnom is string && request.resource.data.pnom.size() > 0 && request.resource.data.pnom.size() <= 120
+        && request.resource.data.ptel is string && request.resource.data.ptel.size() > 0 && request.resource.data.ptel.size() <= 30
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.statut == 'En attente'
+        && request.resource.data.ficheRecue == false;
+
+      // Seul l'enseignant (compte Google vérifié) lit, modifie et supprime.
+      // Remplacer l'adresse ci-dessous par votre adresse Gmail.
+      allow read, update, delete: if request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'VOTRE_ADRESSE@gmail.com';
+    }
+  }
+}
