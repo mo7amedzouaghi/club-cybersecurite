@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Club Cybersécurité – Lycée Oued Ellil</title>
+<meta name="description" content="Club de cybersécurité du Lycée Oued Ellil pour les élèves de 3ème et 4ème Sciences Informatiques : programme, charte et inscription.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Condensed:wght@600;700;800&display=swap">
+<style>
+/* Charte inspirée du Guide du Programme STI, aux couleurs du logo du lycée */
+:root{
+  --marine:#135631;--marine-2:#1d7a45;--marine-3:#0b3320;
+  --or:#F5B800;--or-pale:#fff6d6;
+  --fond:#F2F8F4;--papier:#fff;--texte:#1c2b22;--texte-2:#4a5f52;--ligne:#d6e4db;
+  --code-bg:#0F172A;
+  --n2:#1E7B3C;--n2-pale:#e7f5ec;
+  --n3:#0F7C80;--n3-pale:#e4f4f4;
+  --n4:#a8730a;--n4-pale:#fdf3d9;
+  --rouge:#C62828;--rouge-pale:#fdecec;
+  --titre:"Roboto Condensed","Arial Narrow",sans-serif;
+  --corps:"Inter","Segoe UI",Calibri,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;font-family:var(--corps);font-size:16px;line-height:1.65;color:var(--texte);background:var(--fond);overflow-x:hidden}
+img{max-width:100%;height:auto}
+a{color:var(--marine-2)}
+:focus-visible{outline:3px solid var(--or);outline-offset:2px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--titre);line-height:1.2;color:var(--marine);margin:0 0 .5em}
+p{margin:0 0 1em}
+
+/* Barre */
+.barre{position:sticky;top:0;z-index:50;background:var(--marine);color:#fff;border-bottom:4px solid var(--or)}
+.barre-in{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:8px 20px}
+.marque{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;flex-shrink:0}
+.marque:hover{color:#fff}
+.marque img{width:44px;height:44px;border-radius:50%;background:#fff;display:block}
+.marque-txt{font-family:var(--titre);font-weight:700;font-size:19px;line-height:1.05}
+.marque-txt small{display:block;font-family:var(--corps);font-weight:400;font-size:11.5px;opacity:.8}
+.menu{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.menu a{color:#e1f1e7;text-decoration:none;font-size:14.5px;font-weight:500;padding:7px 12px;border-radius:7px}
+.menu a:hover{background:rgba(255,255,255,.12);color:#fff}
+.menu a.cta{background:var(--or);color:var(--marine-3);font-weight:700}
+.menu a.cta:hover{background:#ffc824;color:var(--marine-3)}
+.burger{display:none;margin-left:auto;background:none;border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;min-height:40px}
+
+/* Bandeau */
+.bandeau{background:linear-gradient(120deg,var(--marine-3) 0%,var(--marine) 55%,var(--marine-2) 100%);color:#fff;position:relative;overflow:hidden}
+.bandeau::after{content:"";position:absolute;inset:auto 0 0 0;height:6px;background:var(--or)}
+.bandeau-grille{position:absolute;right:-40px;top:-30px;width:420px;height:420px;opacity:.09;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:28px 28px;transform:rotate(8deg)}
+.bandeau-in{max-width:1240px;margin:0 auto;padding:44px 20px 52px;position:relative;z-index:1}
+.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:36px;align-items:center}
+.pastille{display:inline-block;background:var(--or);color:var(--marine-3);font-family:var(--titre);font-weight:800;font-size:15px;padding:4px 14px;border-radius:999px;margin-bottom:14px}
+.hero h1{color:#fff;font-size:clamp(30px,5vw,52px);font-weight:800;line-height:1.08;margin-bottom:12px}
+.hero h1 em{font-style:normal;color:var(--or)}
+.chapeau{font-size:18px;max-width:640px;color:#d6efe0;margin:0}
+.faits{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.faits span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:8px;font-size:14px;color:#effaf3}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-block;background:var(--or);color:var(--marine-3);font:700 16px var(--corps);border:0;border-radius:10px;padding:12px 22px;cursor:pointer;text-decoration:none;min-height:44px}
+.btn:hover{background:#ffc824;color:var(--marine-3)}
+.btn.sec{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.55)}
+.btn.sec:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn.clair{background:#fff;color:var(--marine);border:2px solid var(--marine)}
+.btn.clair:hover{background:var(--n2-pale);color:var(--marine)}
+.hero-logo{display:grid;place-items:center}
+.hero-logo img{width:min(300px,100%);border-radius:50%;box-shadow:0 18px 50px rgba(3,24,12,.5);background:#fff}
+
+/* Page */
+.page{max-width:1240px;margin:0 auto;padding:12px 20px 64px}
+.titre-section{font-size:30px;margin:44px 0 16px}
+.sous-titre{color:var(--texte-2);margin:-8px 0 18px;max-width:760px}
+.portes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.porte{display:flex;gap:16px;background:#fff;border:1px solid var(--ligne);border-radius:12px;padding:18px 20px}
+.porte .ic{font-size:30px;line-height:1;flex:none}
+.porte h3{margin:0 0 4px;font-size:20px}
+.porte p{margin:0;font-size:15px;color:var(--texte-2)}
+
+/* Phases */
+.niveaux{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.niveau-carte{background:#fff;border-radius:14px;border:1px solid var(--ligne);overflow:hidden;display:flex;flex-direction:column}
+.niveau-carte .haut{background:var(--c);color:#fff;padding:16px 20px;display:flex;align-items:center;gap:14px}
+.niveau-carte .haut b{font-family:var(--titre);font-size:50px;line-height:1}
+.niveau-carte .haut h3{color:#fff;margin:0;font-size:21px}
+.niveau-carte .haut p{margin:0;opacity:.88;font-size:14px}
+.niveau-carte ol{margin:0;padding:16px 20px 14px 44px;font-size:15px;flex:1}
+.niveau-carte li{padding:2px 0}
+.niveau-carte li b{color:var(--marine);font-weight:600}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;align-items:center}
+.tag{font-size:13px;font-weight:700;color:var(--marine-3);background:var(--or);padding:3px 11px;border-radius:6px}
+
+/* Charte */
+.retenir{background:var(--papier);border:2px solid var(--or);border-radius:14px;padding:20px 22px 8px;margin:8px 0 22px}
+.retenir>h3{display:flex;align-items:center;gap:10px;font-size:22px}
+.retenir>h3::before{content:"💡";font-size:22px}
+ul.coches{list-style:none;padding:0;margin:0 0 12px;columns:2;column-gap:28px}
+ul.coches li{padding-left:24px;position:relative;margin-bottom:6px;break-inside:avoid;font-size:15px}
+ul.coches li::before{content:"✔";position:absolute;left:0;color:var(--n2);font-weight:700}
+.interdits{background:var(--papier);border:1px solid #f1c3c3;border-left:8px solid var(--rouge);border-radius:12px;padding:18px 22px;margin-bottom:26px}
+.interdits h3{color:var(--rouge)}
+.interdits ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px 22px}
+.interdits li{padding-left:24px;position:relative;font-size:15px}
+.interdits li::before{content:"✗";position:absolute;left:2px;color:var(--rouge);font-weight:800}
+ol.etapes{list-style:none;padding:0;margin:0 0 18px;counter-reset:e}
+ol.etapes>li{counter-increment:e;position:relative;padding:0 0 18px 58px}
+ol.etapes>li::before{content:counter(e);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--marine);color:var(--or);font-family:var(--titre);font-weight:800;font-size:19px;display:grid;place-items:center}
+ol.etapes>li::after{content:"";position:absolute;left:19px;top:44px;bottom:4px;width:2px;background:var(--ligne)}
+ol.etapes>li:last-child::after{display:none}
+ol.etapes h4{margin:6px 0 4px;font-size:18px}
+ol.etapes p{margin:0;font-size:15.5px}
+
+/* Notion / formulaire */
+.notion{background:var(--papier);border:1px solid var(--ligne);border-radius:12px;margin-bottom:22px;overflow:hidden}
+.notion-tete{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 22px;border-bottom:1px solid var(--ligne);background:linear-gradient(90deg,var(--n2-pale),#fff 70%)}
+.notion-tete h3{margin:0;font-size:21px}
+.notion-corps{padding:18px 22px 20px}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+label{display:block;font-weight:600;font-size:14px;margin:0 0 4px;color:var(--marine)}
+.f{margin-bottom:14px}
+input,select,textarea{width:100%;background:#fff;color:var(--texte);border:1px solid #b9cdbf;border-radius:8px;padding:11px 12px;font:16px var(--corps);min-height:44px}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--marine-2);outline:3px solid #f5b80066;outline-offset:0}
+fieldset{border:1px solid var(--ligne);border-radius:12px;margin:0 0 16px;padding:12px 16px 4px;min-width:0}
+legend{font-family:var(--titre);font-weight:700;font-size:17px;color:var(--marine);padding:0 8px}
+.chk{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+.chk input{width:22px;height:22px;min-height:0;margin-top:2px;flex:none}
+.chk label{font-weight:500;font-size:15px;margin:0;color:var(--texte)}
+.err{color:var(--rouge);font-weight:600;font-size:14px;min-height:20px;margin:4px 0 10px}
+#fiche{display:none;margin-top:24px}
+#fiche .notion-corps{padding-top:16px}
+#fiche .fl{width:64px;height:64px;float:right;margin:0 0 8px 12px;border-radius:50%}
+#fiche .meta{color:var(--texte-2);font-size:14px;margin:0 0 12px}
+#fiche table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:15px}
+#fiche td{padding:8px 12px;border-top:1px solid var(--ligne);vertical-align:top;overflow-wrap:anywhere}
+#fiche td:first-child{width:36%;font-weight:700;color:var(--marine);font-family:var(--titre);font-size:16px;background:#f7fbf8}
+#fiche p.note{font-size:13.5px}
+#fiche .sig{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px;font-size:13px}
+#fiche .sig div{border-top:1.5px solid var(--marine);padding-top:6px;min-height:72px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.ok{color:var(--n2);font-weight:600}
+.enc{display:flex;gap:12px;padding:12px 16px;border-radius:10px;margin:16px 0 0;font-size:14.5px;border:1px solid #f1dc8f;background:var(--or-pale)}
+.enc b.ico{flex:0 0 26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--or);color:var(--marine-3);font-family:var(--titre);font-size:15px}
+
+/* Pied */
+.pied{background:var(--marine-3);color:#c6e0d1;font-size:14.5px}
+.pied-in{max-width:1240px;margin:0 auto;padding:32px 20px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px}
+.pied h4{color:#fff;font-size:16px}
+.pied a{color:#c6e0d1;text-decoration:none;display:block;margin-bottom:4px;padding:2px 0}
+.pied a:hover{color:var(--or)}
+.pied .signature{color:var(--or);font-weight:700}
+.pied-bas{border-top:1px solid rgba(255,255,255,.1);text-align:center;padding:12px;font-size:13px}
+
+/* Responsive */
+@media (max-width:1020px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .hero-logo{order:-1;justify-items:start}
+  .hero-logo img{width:150px}
+  .niveaux{grid-template-columns:minmax(0,1fr)}
+  .pied-in{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  .burger{display:block}
+  .marque-txt small{display:none}
+  .marque-txt{font-size:17px}
+  .barre-in{flex-wrap:wrap;gap:8px 12px}
+  .menu{display:none;width:100%;flex-direction:column;margin-left:0;padding-bottom:6px}
+  .menu.ouvert{display:flex}
+  .menu a{padding:12px 12px;font-size:16px}
+  .bandeau-in{padding:28px 16px 36px}
+  .page{padding:4px 16px 48px}
+  .titre-section{font-size:26px;margin-top:34px}
+  .portes,.row{grid-template-columns:minmax(0,1fr)}
+  ul.coches{columns:1}
+  .notion-tete,.notion-corps{padding-left:16px;padding-right:16px}
+  ol.etapes>li{padding-left:50px}
+  ol.etapes>li::before{width:36px;height:36px;font-size:17px}
+  ol.etapes>li::after{left:17px;top:40px}
+  .hero-cta .btn{flex:1 1 100%;text-align:center}
+  #fiche .sig{grid-template-columns:minmax(0,1fr)}
+  #fiche .sig div{min-height:56px}
+  #fiche td:first-child{width:40%}
+  .actions .btn{flex:1 1 100%;text-align:center}
+}
+@media print{
+  body{background:#fff}
+  .barre,.bandeau,.page>*:not(#inscription),.pied,.notion-tete .noprint,form,.actions,.noprint,.enc{display:none!important}
+  #inscription>*:not(#fiche){display:none!important}
+  #fiche{display:block!important;margin:0;border:0}
+  .notion{border:0}
+}
+</style>
+</head>
+<body id="haut">
+
+<header class="barre">
+ <div class="barre-in">
+  <a class="marque" href="#haut"><img src="logo.png" alt="Logo du Lycée Oued Ellil" width="44" height="44"><span class="marque-txt">Club Cybersécurité<small>Lycée Oued Ellil</small></span></a>
+  <button class="burger" type="button" aria-expanded="false" aria-label="Ouvrir le menu">Menu</button>
+  <nav class="menu" aria-label="Navigation principale">
+   <a href="#club">Le club</a><a href="#programme">Programme</a><a href="#charte">Charte</a><a href="#inscription" class="cta">S'inscrire</a>
+  </nav>
+ </div>
+</header>
+
+<main>
+<section class="bandeau"><div class="bandeau-grille" aria-hidden="true"></div><div class="bandeau-in">
+ <div class="hero">
+  <div>
+   <span class="pastille">3ème et 4ème SI · A.S 2026-2027</span>
+   <h1>Club de <em>cybersécurité</em> du lycée</h1>
+   <p class="chapeau">Apprendre à protéger, comprendre comment on attaque, et le faire dans un cadre légal et éthique, avec un laboratoire isolé et des défis en équipe.</p>
+   <div class="faits"><span>24 séances</span><span>1 h 30 par semaine</span><span>15 à 20 places</span><span>Déc. 2026 – mai 2027</span></div>
+   <div class="hero-cta"><a class="btn" href="#inscription">Je m'inscris</a><a class="btn sec" href="#programme">Voir le programme</a></div>
+  </div>
+  <div class="hero-logo"><img src="logo.png" alt="Logo du Lycée Oued Ellil" width="300" height="300"></div>
+ </div>
+</div></section>
+
+<div class="page">
+
+<section id="club">
+ <h2 class="titre-section">Le club en bref</h2>
+ <p class="sous-titre">Les dates exactes seront confirmées selon le calendrier du lycée. Le club n'est pas noté et n'a pas d'incidence sur les moyennes. Responsable : M. Zouaghi Mohamed.</p>
+ <div class="portes">
+  <div class="porte"><span class="ic" aria-hidden="true">📚</span><div><h3>Apprendre</h3><p>Hygiène numérique, réseaux, Linux, cryptographie, failles web et leurs corrections.</p></div></div>
+  <div class="porte"><span class="ic" aria-hidden="true">🧪</span><div><h3>Pratiquer</h3><p>Un laboratoire de machines virtuelles isolé : on attaque, puis on corrige.</p></div></div>
+  <div class="porte"><span class="ic" aria-hidden="true">🏁</span><div><h3>Défier</h3><p>Entraînement aux CTF en équipe et mini-CTF final avec classement.</p></div></div>
+  <div class="porte"><span class="ic" aria-hidden="true">📣</span><div><h3>Transmettre</h3><p>Les membres animent un atelier de sensibilisation pour les autres classes.</p></div></div>
+ </div>
+</section>
+
+<section id="programme">
+ <h2 class="titre-section">Programme des 24 séances</h2>
+ <p class="sous-titre">Trois phases de 8 séances. Chaque séance produit une trace qui compte pour les badges.</p>
+ <div class="niveaux">
+  <div class="niveau-carte" style="--c:var(--n2)"><div class="haut"><b>1</b><div><h3>Fondamentaux</h3><p>Séances 1 à 8</p></div></div>
+   <ol>
+    <li><b>Accueil et enjeux</b> : charte, panorama</li>
+    <li><b>Hygiène numérique</b> : mots de passe, double authentification</li>
+    <li><b>Hameçonnage</b> et ingénierie sociale</li>
+    <li><b>Bases de Linux</b></li>
+    <li><b>Laboratoire isolé</b> : mise en place</li>
+    <li><b>Réseaux</b> pour la sécurité (Wireshark)</li>
+    <li><b>Cryptographie (1)</b> : chiffrements</li>
+    <li><b>Cryptographie (2)</b> : hachage, mini-CTF</li>
+   </ol></div>
+  <div class="niveau-carte" style="--c:var(--n3)"><div class="haut"><b>2</b><div><h3>Pratique en labo</h3><p>Séances 9 à 16</p></div></div>
+   <ol start="9">
+    <li><b>Application web</b> : anatomie</li>
+    <li><b>Injection SQL (1)</b> : comprendre</li>
+    <li><b>Injection SQL (2)</b> : se protéger</li>
+    <li><b>Injection de scripts (XSS)</b></li>
+    <li><b>Authentification</b> et sessions</li>
+    <li><b>Poste et réseau</b> : scan dans le labo</li>
+    <li><b>Logs et détection</b> : rapport d'incident</li>
+    <li><b>Forensique</b> et stéganographie</li>
+   </ol></div>
+  <div class="niveau-carte" style="--c:var(--n4)"><div class="haut"><b>3</b><div><h3>Projet et compétition</h3><p>Séances 17 à 24</p></div></div>
+   <ol start="17">
+    <li><b>Introduction aux CTF</b>, équipes</li>
+    <li><b>Entraînement CTF (1)</b> : web et crypto</li>
+    <li><b>Entraînement CTF (2)</b> : forensique</li>
+    <li><b>Préparer la sensibilisation</b></li>
+    <li><b>Attaque et défense (1)</b></li>
+    <li><b>Attaque et défense (2)</b></li>
+    <li><b>Animation</b> dans les classes</li>
+    <li><b>Mini-CTF final</b>, badges, bilan</li>
+   </ol></div>
+ </div>
+ <div class="badges"><b>Badges à gagner :</b><span class="tag">Réflexes</span><span class="tag">Laboratoire</span><span class="tag">Compétiteur</span><span class="tag">Ambassadeur</span></div>
+</section>
+
+<section id="charte">
+ <h2 class="titre-section">Charte du club</h2>
+ <p class="sous-titre">À lire attentivement : l'inscription n'est possible qu'en acceptant la charte, qui doit aussi être connue de ton parent ou tuteur.</p>
+ <div class="retenir"><h3>À retenir</h3>
+  <ul class="coches"><li>J'attaque uniquement le laboratoire du club.</li><li>Je protège mes données et celles des autres.</li><li>Si je trouve une vraie faille, je la signale.</li><li>Je joue franc jeu et j'aide les autres.</li></ul></div>
+ <div class="interdits"><h3>Ce qui est interdit</h3>
+  <ul><li>Attaquer le réseau du lycée</li><li>Viser un site, un compte ou un appareil qui n'est pas à moi</li><li>Accéder aux données ou mots de passe d'autrui</li><li>Créer ou partager un virus ou un outil malveillant</li><li>Tricher pendant les défis</li></ul></div>
+ <ol class="etapes">
+  <li><h4>Cadre pédagogique</h4><p>Les techniques apprises au club servent à apprendre et à protéger, jamais à nuire.</p></li>
+  <li><h4>Laboratoire isolé</h4><p>Je ne teste des attaques que sur les machines virtuelles du laboratoire et sur des plateformes d'entraînement prévues à cet effet.</p></li>
+  <li><h4>Aucune cible réelle</h4><p>Je n'attaque ni le réseau du lycée, ni un site, un compte ou un appareil qui ne m'appartient pas, même « pour voir » ou « pour rire ».</p></li>
+  <li><h4>Vie privée</h4><p>Je ne cherche pas à accéder aux données ou aux mots de passe d'autres personnes. Mes propres mots de passe restent secrets, y compris pendant les séances.</p></li>
+  <li><h4>Signalement responsable</h4><p>Si je découvre une faille réelle, je la signale à l'encadrant sans l'exploiter ni en parler autour de moi.</p></li>
+  <li><h4>Pas de logiciels malveillants</h4><p>Je ne crée, ne partage et n'utilise aucun virus ni outil malveillant en dehors du cadre fixé par l'encadrant.</p></li>
+  <li><h4>Esprit sportif</h4><p>Pas de triche pendant les défis, respect des équipes et des règles de chaque compétition.</p></li>
+  <li><h4>Respect et entraide</h4><p>J'aide les autres à progresser et je partage ce que j'apprends.</p></li>
+  <li><h4>Responsabilité</h4><p>Accéder sans autorisation à un système informatique peut constituer un délit puni par la loi. En cas de manquement à cette charte, je peux être exclu du club et la direction du lycée sera informée.</p></li>
+ </ol>
+</section>
+
+<section id="inscription">
+ <h2 class="titre-section">Inscription</h2>
+ <p class="sous-titre">Remplis le formulaire, génère ta fiche, imprime-la ou recopie-la, fais-la signer par ton parent ou tuteur, puis remets-la à M. Zouaghi.</p>
+
+ <div class="notion"><div class="notion-tete"><h3>Formulaire d'inscription</h3><span class="tag">* obligatoire</span></div><div class="notion-corps">
+ <form id="f" novalidate>
+  <fieldset>
+   <legend>L'élève</legend>
+   <div class="row">
+    <div class="f"><label for="nom">Nom *</label><input id="nom" autocomplete="family-name" required></div>
+    <div class="f"><label for="prenom">Prénom *</label><input id="prenom" autocomplete="given-name" required></div>
+   </div>
+   <div class="row">
+    <div class="f"><label for="classe">Classe *</label>
+     <select id="classe" required>
+      <option value="">Choisir…</option>
+      <option>3ème Sciences Informatiques</option>
+      <option>4ème Sciences Informatiques</option>
+     </select></div>
+    <div class="f"><label for="tel">Téléphone de l'élève</label><input id="tel" type="tel" autocomplete="tel" inputmode="tel"></div>
+   </div>
+   <div class="row">
+    <div class="f"><label for="niveau">Ton niveau en informatique *</label>
+     <select id="niveau" required>
+      <option value="">Choisir…</option>
+      <option>Débutant : je découvre</option>
+      <option>Intermédiaire : je code déjà (HTML, JS, PHP, SQL)</option>
+      <option>Avancé : j'ai déjà fait des projets personnels</option>
+     </select></div>
+    <div class="f"><label for="email">Adresse e-mail</label><input id="email" type="email" autocomplete="email"></div>
+   </div>
+   <div class="f"><label for="motiv">Pourquoi veux-tu rejoindre le club ? *</label><textarea id="motiv" required></textarea></div>
+  </fieldset>
+
+  <fieldset>
+   <legend>Parent ou tuteur</legend>
+   <div class="row">
+    <div class="f"><label for="pnom">Nom et prénom *</label><input id="pnom" required></div>
+    <div class="f"><label for="ptel">Téléphone *</label><input id="ptel" type="tel" inputmode="tel" required></div>
+   </div>
+  </fieldset>
+
+  <div class="chk"><input type="checkbox" id="cCharte"><label for="cCharte">J'ai lu la charte du club et je m'engage à la respecter. *</label></div>
+  <div class="chk"><input type="checkbox" id="cParent"><label for="cParent">Mon parent ou tuteur a pris connaissance du projet et de la charte, et signera l'autorisation sur la fiche. *</label></div>
+  <div class="err" id="err" role="alert"></div>
+  <button class="btn" type="submit">Générer ma fiche d'inscription</button>
+ </form>
+ </div></div>
+
+ <div id="fiche" class="notion" aria-live="polite">
+  <div class="notion-tete"><h3>Fiche d'inscription – Club Cybersécurité</h3><span class="tag noprint">À imprimer et signer</span></div>
+  <div class="notion-corps">
+   <img class="fl" src="logo.png" alt="" width="64" height="64">
+   <p class="meta">Lycée Oued Ellil · Année scolaire 2026-2027 · Générée le <span id="fDate"></span></p>
+   <table id="fTable"></table>
+   <p class="note"><b>Autorisation parentale.</b> Je soussigné(e) autorise mon enfant à participer aux activités du club de cybersécurité du Lycée Oued Ellil et déclare avoir pris connaissance de la charte du club.</p>
+   <div class="sig"><div>Signature de l'élève</div><div>Signature du parent ou tuteur<br>(précédée de « Lu et approuvé »)</div><div>Visa du responsable du club</div></div>
+   <div class="actions noprint">
+    <button class="btn" type="button" id="bCopy">Copier la fiche</button>
+    <button class="btn clair" type="button" id="bPrint">Imprimer</button>
+   </div>
+   <p class="note noprint" id="msg"></p>
+  </div>
+ </div>
+ <div class="enc"><b class="ico">i</b><span id="infoTxt">Les informations saisies restent sur cette page et ne sont envoyées nulle part : seule la fiche remise à l'enseignant vaut inscription.</span></div>
+</section>
+
+</div>
+</main>
+
+<footer class="pied">
+ <div class="pied-in">
+  <div><h4>Club Cybersécurité</h4><p>Un club pour les élèves de 3ème et 4ème Sciences Informatiques du Lycée Oued Ellil : apprendre à protéger, dans un cadre légal et éthique.</p><p class="signature">Responsable : Mr Zouaghi Mohamed</p></div>
+  <div><h4>Sur cette page</h4><a href="#club">Le club</a><a href="#programme">Programme</a><a href="#charte">Charte</a><a href="#inscription">Inscription</a></div>
+  <div><h4>Infos</h4><p>Année scolaire 2026-2027<br>24 séances de 1 h 30<br>Salle informatique du lycée</p></div>
+ </div>
+ <div class="pied-bas">Lycée Oued Ellil · Club Cybersécurité · A.S 2026-2027</div>
+</footer>
+
+<script>
+(function(){
+  var bg=document.querySelector('.burger'),mn=document.querySelector('.menu');
+  if(bg&&mn){bg.addEventListener('click',function(){var o=mn.classList.toggle('ouvert');bg.setAttribute('aria-expanded',o?'true':'false');});
+   mn.addEventListener('click',function(e){if(e.target.tagName==='A'){mn.classList.remove('ouvert');bg.setAttribute('aria-expanded','false');}});}
+  var $ = function(id){return document.getElementById(id)};
+  var fields = [
+    ['Nom','nom'],['Prénom','prenom'],['Classe','classe'],['Niveau','niveau'],
+    ['Téléphone élève','tel'],['E-mail','email'],['Motivation','motiv'],
+    ['Parent ou tuteur','pnom'],['Téléphone parent','ptel']
+  ];
+  var lastText = '';
+  // Collez ici l'URL de l'application web Google Apps Script (voir LISEZMOI.txt). Vide = pas d'envoi.
+  var ENDPOINT = '';
+
+  function val(id){return ($(id).value || '').trim()}
+
+  if (ENDPOINT) { $('infoTxt').textContent = 'Ton inscription est envoyée au responsable du club. Remets aussi la fiche signée par ton parent ou tuteur : elle valide l\'inscription.'; }
+
+  $('f').addEventListener('submit', function(e){
+    e.preventDefault();
+    var err = $('err'); err.textContent = '';
+    var req = ['nom','prenom','classe','niveau','motiv','pnom','ptel'];
+    for (var i=0;i<req.length;i++){
+      if (!val(req[i])) { err.textContent = 'Merci de remplir tous les champs marqués d\'une étoile.'; $(req[i]).focus(); return; }
+    }
+    var mail = val('email');
+    if (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { err.textContent = 'L\'adresse e-mail n\'est pas valide.'; $('email').focus(); return; }
+    if (!/^[0-9+\s().-]{8,}$/.test(val('ptel'))) { err.textContent = 'Le téléphone du parent semble incomplet.'; $('ptel').focus(); return; }
+    if (!$('cCharte').checked) { err.textContent = 'Il faut accepter la charte pour t\'inscrire.'; $('cCharte').focus(); return; }
+    if (!$('cParent').checked) { err.textContent = 'Ton parent ou tuteur doit être informé du projet.'; $('cParent').focus(); return; }
+
+    var d = new Date();
+    var dateStr = d.toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
+    $('fDate').textContent = dateStr;
+    var t = $('fTable'); t.textContent = '';
+    var lines = ['FICHE D\'INSCRIPTION – CLUB CYBERSÉCURITÉ – Lycée Oued Ellil 2026-2027','Date : ' + dateStr,''];
+    fields.forEach(function(p){
+      var v = val(p[1]) || '—';
+      var tr = document.createElement('tr');
+      var a = document.createElement('td'); a.textContent = p[0];
+      var b = document.createElement('td'); b.textContent = v;
+      tr.appendChild(a); tr.appendChild(b); t.appendChild(tr);
+      lines.push(p[0] + ' : ' + v);
+    });
+    var tr2 = document.createElement('tr');
+    var c1 = document.createElement('td'); c1.textContent = 'Charte acceptée';
+    var c2 = document.createElement('td'); c2.textContent = 'Oui, le ' + dateStr;
+    tr2.appendChild(c1); tr2.appendChild(c2); t.appendChild(tr2);
+    lines.push('Charte acceptée : oui');
+    lines.push('', 'Signatures à recueillir : élève, parent ou tuteur, responsable du club.');
+    lastText = lines.join('\n');
+
+    var f = $('fiche'); f.style.display = 'block';
+    $('msg').textContent = '';
+    if (ENDPOINT) {
+      var data = {};
+      fields.forEach(function(p){ data[p[1]] = val(p[1]); });
+      try {
+        fetch(ENDPOINT, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(data)})
+          .then(function(){ $('msg').textContent = 'Inscription envoyée au responsable du club. Remets aussi la fiche signée.'; $('msg').className = 'note noprint ok'; })
+          .catch(function(){ $('msg').textContent = 'Envoi impossible pour le moment : remets la fiche signée à M. Zouaghi.'; });
+      } catch(e) { $('msg').textContent = 'Envoi impossible pour le moment : remets la fiche signée à M. Zouaghi.'; }
+    }
+    f.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  $('bCopy').addEventListener('click', function(){
+    var m = $('msg');
+    try {
+      navigator.clipboard.writeText(lastText).then(function(){
+        m.textContent = 'Fiche copiée : colle-la dans un message ou un document.';
+        m.className = 'note noprint ok';
+      }, function(){ m.textContent = 'Copie impossible ici : fais une capture d\'écran de la fiche.'; });
+    } catch(e) {
+      m.textContent = 'Copie impossible ici : fais une capture d\'écran de la fiche.';
+    }
+  });
+
+  $('bPrint').addEventListener('click', function(){
+    var m = $('msg');
+    try { window.print(); } catch(e) {}
+    m.textContent = 'Si l\'impression ne s\'ouvre pas, fais une capture d\'écran de la fiche ou utilise le menu du navigateur.';
+  });
+})();
+</script>
+</body>
+</html>
